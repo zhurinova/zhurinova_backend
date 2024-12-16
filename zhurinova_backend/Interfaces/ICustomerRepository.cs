@@ -12,6 +12,8 @@ namespace zhurinova_backend.Interfaces
         Task<Customer?> UpdateAsync(int id, UpdateCustomerRequestDto customerDto);
         Task<Customer?> DeleteAsync(int id);
         Task<bool> CustomerExist(int id);
+        Task<List<GetCustomerOrders>> GetCustomerOrdersAsync();
+        Task<List<CustomerWithAvgPriceOrderDto>> GetCustomerAvrPriceOrderAsync();
 
     }
 }

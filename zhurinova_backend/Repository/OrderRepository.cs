@@ -54,7 +54,8 @@ namespace zhurinova_backend.Repository
             }
 
             existingOrder.Status = orderModel.Status;
-            existingOrder.DateTime = orderModel.DateTime;
+            existingOrder.Price = orderModel.Price;
+            //existingOrder.DateTime = orderModel.DateTime;
 
             await _context.SaveChangesAsync();
 

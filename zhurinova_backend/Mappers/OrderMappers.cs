@@ -10,6 +10,7 @@ namespace zhurinova_backend.Mappers
             return new OrderDto
             {
                 Id = orderModel.Id,
+                Price = orderModel.Price,
                 Status = orderModel.Status,
                 DateTime = orderModel.DateTime,
                 CustomerId = orderModel.CustomerId
@@ -21,7 +22,7 @@ namespace zhurinova_backend.Mappers
             return new Order
             {
                 Status = orderDto.Status,
-                DateTime = orderDto.DateTime,
+                Price = orderDto.Price,
                 CustomerId = customerId
             };
         }
@@ -30,7 +31,8 @@ namespace zhurinova_backend.Mappers
             return new Order
             {
                 Status = orderDto.Status,
-                DateTime = orderDto.DateTime,
+                Price = orderDto.Price,
+                //DateTime = orderDto.DateTime,
             };
         }
     }

@@ -86,5 +86,34 @@ namespace zhurinova_backend.Repository
 
             return existingCustomer;
         }
+
+
+        public async Task<List<GetCustomerOrders>> GetCustomerOrdersAsync()
+        {
+            var customerWithOrders = from customer in _context.Customers
+                                     join order in _context.Orders on customer.Id equals order.CustomerId into groupedOrders
+                                     select new GetCustomerOrders
+                                     {
+                                         Id = customer.Id,
+                                         Name = customer.Name,
+                                         Email = customer.Email,
+                                         Count = groupedOrders.Count(),
+                                     };
+            return await customerWithOrders.ToListAsync();
+        }
+        public async Task<List<CustomerWithAvgPriceOrderDto>> GetCustomerAvrPriceOrderAsync()
+        {
+            var customerWithAvgOrderPrice = from customer in _context.Customers
+                                            select new CustomerWithAvgPriceOrderDto
+                                            {
+                                                Id = customer.Id,
+                                                Name = customer.Name,
+                                                AvrPriceOrder = customer.Orders.Any()
+                                                    ? customer.Orders.Average(e => (decimal?)e.Price) ?? 0
+                                                    : 0,
+                                                NumberOfOrders = customer.Orders.Count()
+                                            };
+            return await customerWithAvgOrderPrice.ToListAsync();
+        }
     }
 }

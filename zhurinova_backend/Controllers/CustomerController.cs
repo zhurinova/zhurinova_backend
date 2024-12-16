@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using zhurinova_backend.Data;
 using zhurinova_backend.DTOs.Customer;
@@ -92,6 +93,38 @@ namespace zhurinova_backend.Controllers
             }
 
             return NoContent();
+        }
+
+        [HttpGet("amount-of-orders")]
+        public async Task<IActionResult> GetCustomerOrders()
+        {
+            if (!ModelState.IsValid) 
+                return BadRequest(ModelState);
+
+            var customersOrders = await _customerRepo.GetCustomerOrdersAsync();
+
+            if (customersOrders == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(customersOrders);
+        }
+
+        [HttpGet("with-average-price")]
+        public async Task<IActionResult> GetCustomerAvrPriceOrder()
+        {
+            if (!ModelState.IsValid) 
+                return BadRequest(ModelState);
+
+            var customersWithAvgPrice = await _customerRepo.GetCustomerAvrPriceOrderAsync();
+
+            if (customersWithAvgPrice == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(customersWithAvgPrice);
         }
     }
 }
