@@ -1,0 +1,6 @@
+@zhurinova_backend_HostAddress = http://localhost:5216
+
+GET {{zhurinova_backend_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
