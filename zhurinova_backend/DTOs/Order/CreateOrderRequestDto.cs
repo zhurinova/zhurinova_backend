@@ -12,6 +12,6 @@ namespace zhurinova_backend.DTOs.Order
         [MinLength(5, ErrorMessage = "Title must be Opened/Closed")]
         [MaxLength(7, ErrorMessage = "Title must be Opened/Closed")]
         public string? Status { get; set; }
-        //public DateTime DateTime { get; set; } = DateTime.Now;
+        public DateTime DateTime { get; set; } = DateTime.UtcNow;
     }
 }

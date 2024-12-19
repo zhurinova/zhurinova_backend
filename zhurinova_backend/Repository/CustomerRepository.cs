@@ -53,7 +53,6 @@ namespace zhurinova_backend.Repository
             {
                 customers = customers.Where(s => s.Address.Contains(query.Address));
             }
-            return await customers.ToListAsync();
 
             if(!string.IsNullOrWhiteSpace(query.SortBy))
             {
@@ -61,7 +60,14 @@ namespace zhurinova_backend.Repository
                 {
                     customers = query.IsDecsending ? customers.OrderByDescending(s => s.Name) : customers.OrderBy(s => s.Name);
                 }
+
+                if (query.SortBy.Equals("Address", StringComparison.OrdinalIgnoreCase))
+                {
+                    customers = query.IsDecsending ? customers.OrderByDescending(s => s.Address) : customers.OrderBy(s => s.Address);
+                }
             }
+
+            return await customers.ToListAsync();
         }
 
         public async Task<Customer?> GetByIdAsync(int id)

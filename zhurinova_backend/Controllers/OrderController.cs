@@ -57,6 +57,7 @@ namespace zhurinova_backend.Controllers
             {
                 return BadRequest("Customer does not exist");
             }
+
             var orderModel = orderDto.ToOrderFromCreate(customerId);
             await _orderRepo.CreateAsync(orderModel);
             return CreatedAtAction(nameof(GetById), new { id = orderModel.Id }, orderModel.ToOrderDto());

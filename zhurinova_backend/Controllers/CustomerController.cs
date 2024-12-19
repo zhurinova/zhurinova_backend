@@ -51,6 +51,7 @@ namespace zhurinova_backend.Controllers
 
         // POST api/<CustomerController>
         [HttpPost]
+        [Authorize(Roles = "admin")]
         public async Task<IActionResult> Create([FromBody] CreateCustomerRequestDto customerDto)  // FromBody - потому что берем не с URL,а с HTTP 
         {
             if (!ModelState.IsValid)
@@ -64,6 +65,7 @@ namespace zhurinova_backend.Controllers
 
         // PUT api/<CustomerController>/5
         [HttpPut]
+        [Authorize(Roles = "admin")]
         [Route("{id:int}")]
         public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateCustomerRequestDto updateDto)
         {
@@ -80,6 +82,7 @@ namespace zhurinova_backend.Controllers
 
         // DELETE api/<CustomerController>/5
         [HttpDelete]
+        [Authorize(Roles = "admin")]
         [Route("{id:int}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
@@ -96,6 +99,7 @@ namespace zhurinova_backend.Controllers
         }
 
         [HttpGet("amount-of-orders")]
+        [Authorize(Roles = "admin, user")]
         public async Task<IActionResult> GetCustomerOrders()
         {
             if (!ModelState.IsValid) 
@@ -112,6 +116,7 @@ namespace zhurinova_backend.Controllers
         }
 
         [HttpGet("with-average-price")]
+        [Authorize(Roles = "admin, user")]
         public async Task<IActionResult> GetCustomerAvrPriceOrder()
         {
             if (!ModelState.IsValid) 
